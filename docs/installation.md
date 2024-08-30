@@ -33,5 +33,5 @@ cd ..
 ```
 git clone https://github.com/eric-zqwang/puzzlefusion-plusplus.git
 cd puzzlefusion-plusplus/
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt --upgrade-strategy only-if-needed
 ```
