@@ -31,7 +31,7 @@ cd ..
 **Step 4.** Install remaining packages.
 
 ```
-git clone https://github.com/eric-zqwang/puzzlefusion-plusplus.git
+git clone https://github.com/regarry/puzzlefusion-plusplus.git
 cd puzzlefusion-plusplus/
 pip3 install -r requirements.txt --upgrade-strategy only-if-needed
 ```
