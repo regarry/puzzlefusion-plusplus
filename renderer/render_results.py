@@ -1,4 +1,4 @@
-from renderer.myrenderer import MyRenderer
+from myrenderer import MyRenderer
 import os
 import hydra
 import json
@@ -16,9 +16,9 @@ def render_results(cfg, renderer: MyRenderer):
         transformation, gt_transformation, acc, init_pose = renderer.load_transformation_data(file)
         
         parts = renderer.load_mesh_parts(file, gt_transformation, init_pose)
-        
         save_path = f"./BlenderToolBox_render/{save_dir}/{file}"
         os.makedirs(save_path, exist_ok=True)
+        print("making directory for video file")
 
         renderer.save_img(parts, gt_transformation, gt_transformation, init_pose, os.path.join(save_path, "gt.png"))
 
