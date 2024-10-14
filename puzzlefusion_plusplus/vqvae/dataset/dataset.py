@@ -164,7 +164,7 @@ class GeometryPartDataset(Dataset):
         if self.shuffle_parts:
             random.shuffle(mesh_files)
 
-        # read mesh and sample points
+        # read mesh 
         meshes = [
             trimesh.load(os.path.join(data_folder, mesh_file))
             for mesh_file in mesh_files
@@ -173,6 +173,7 @@ class GeometryPartDataset(Dataset):
         # Check if the meshes are connected
         graph = self._check_connectivity(meshes)
         
+        # sample surface of mesh to create point cloud
         pcs = [
                 trimesh.sample.sample_surface(mesh, self.num_points)[0]
                 for mesh in meshes

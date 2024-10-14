@@ -6,8 +6,8 @@ tools/
 data/
 !/puzzlefusion_plusplus/vqvae/data
 .vscode/
-
-
+*.zip
+stdout.txt
 __pycache__
 *.ipynb
 

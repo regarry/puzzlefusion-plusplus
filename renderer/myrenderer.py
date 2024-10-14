@@ -158,9 +158,9 @@ class MyRenderer:
         return parts
     
 
-    def render_parts(self, parts, gt_transformatoin, transformation, init_pose, frame=None):
+    def render_parts(self, parts, gt_transformation, transformation, init_pose, frame=None):
         for i,shape in enumerate(parts):
-            final_transformation = self.compute_final_transformation(init_pose, gt_transformatoin[i], transformation[i])
+            final_transformation = self.compute_final_transformation(init_pose, gt_transformation[i], transformation[i])
             shape.rotation_quaternion = final_transformation.to_quaternion()
             shape.location = self.location_offset + final_transformation.to_translation()
             
@@ -263,13 +263,14 @@ class MyRenderer:
 
     def save_video(self, imgs_path, video_path, frame):
         bt.renderAnimation(f"{imgs_path}/", self.cam, duration=frame)
+        # this ^ is the command that is taking forever to save imgs
         
         # Compile frames into a video using FFmpeg
         command = [
             'ffmpeg', 
             '-framerate', f'{frame / 8}',  
             '-i', f'{imgs_path}/%04d.png',  # Adjust the pattern based on how your frames are named
-            '-vf', 'tpad=stop_mode=clone:stop_duration=2',  # Hold the last frame for 2 seconds
+            #'-vf', 'tpad=stop_mode=clone:stop_duration=2',  # Hold the last frame for 2 seconds
             '-c:v', 'libx264', 
             '-pix_fmt', 'yuv420p', 
             '-crf', '17',  # Adjust CRF (lower means higher quality)
@@ -284,8 +285,8 @@ class MyRenderer:
         print(f"Video saved to {video_path}")
 
 
-    def save_img(self, parts, gt_transformatoin, transformation, init_pose, save_path):
-        self.render_parts(parts, gt_transformatoin, transformation, init_pose)
+    def save_img(self, parts, gt_transformation, transformation, init_pose, save_path):
+        self.render_parts(parts, gt_transformation, transformation, init_pose)
         # bt.renderImage(f"./render_results/{self.output_path}/{file}.png", self.cam)
         bt.renderImage(f"{save_path}", self.cam)
         
