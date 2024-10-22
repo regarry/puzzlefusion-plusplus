@@ -74,8 +74,11 @@ class GeometryPartDataset(Dataset):
             fracs.sort()
             for frac in fracs:
                 # we take both fractures and modes for training
-                if 'fractured' not in frac and 'mode' not in frac:
+                #if 'fractured' not in frac and 'mode' not in frac:
+                #    continue
+                if not os.path.isdir(frac):
                     continue
+                print(frac)
                 frac = os.path.join(mesh, frac)
                 num_parts = len(os.listdir(os.path.join(self.data_dir, frac)))
                 if self.min_num_part <= num_parts <= self.max_num_part:

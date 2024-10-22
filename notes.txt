@@ -2,3 +2,5 @@ bsub -Is -n 32 -W 2:00 -q new_gpu -gpu "num=1:mode=shared:mps=no" bash
 conda activate /usr/local/usrapps/lsmsmart/regarry/puzzlepp
 cd puzzlefusion-plusplus/
 sh ./scripts/inference.sh
+sinfo -t idle | grep gpu # view the number of idle nodes per queue
+squeue -u regarry
